@@ -1,6 +1,4 @@
-import axios from "axios";
 import * as cheerio from "cheerio";
-import qs from "querystring";
 
 export const extractPlayLinks = (html: string): string[] => {
   const $ = cheerio.load(html);

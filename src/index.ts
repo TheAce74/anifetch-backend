@@ -13,7 +13,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions: CorsOptions = {
-  origin: ["http://localhost:5173"],
+  // use env variables next time
+  origin: ["http://localhost:5173", "https://anifetchbyace.vercel.app"],
 };
 
 app.use(cors(corsOptions));
