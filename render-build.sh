@@ -4,6 +4,10 @@ set -o errexit  # Exit on error
 pnpm install
 pnpm build  # Uncomment if needed
 
+# Install Chrome explicitly
+echo "Installing Chrome..."
+npx puppeteer browsers install chrome
+
 # Define Puppeteer cache paths
 PUPPETEER_CACHE_DIR=${PUPPETEER_CACHE_DIR:-/opt/render/.cache/puppeteer}
 XDG_CACHE_HOME=${XDG_CACHE_HOME:-/opt/render/.cache}

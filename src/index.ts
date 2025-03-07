@@ -8,6 +8,7 @@ import {
   extractPlayLinks,
   sleepSync,
 } from "@/utils";
+import "dotenv/config";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,7 +29,16 @@ app.get("/", async (req, res) => {
       resolution: string;
     };
 
-    const browser = await puppeteer.launch();
+    const browser =
+      process.env.ENV === "development"
+        ? await puppeteer.launch()
+        : await puppeteer.launch({
+            executablePath:
+              process.env.PUPPETEER_EXECUTABLE_PATH ||
+              "/opt/render/.cache/puppeteer/chrome/linux-133.0.6943.141/chrome",
+            headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+          });
     const page = await browser.newPage();
     await page.goto(url);
 
