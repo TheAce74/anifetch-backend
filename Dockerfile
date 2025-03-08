@@ -1,7 +1,7 @@
 FROM ghcr.io/puppeteer/puppeteer:24.3.1
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install pnpm manually
+RUN npm install -g pnpm
 
 ENV PUPPETEER_SKIP_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
