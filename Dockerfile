@@ -1,6 +1,6 @@
 FROM ghcr.io/puppeteer/puppeteer:24.3.1
 
-# Set up environment variables
+# Set environment variables
 ENV PUPPETEER_SKIP_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 
@@ -16,11 +16,14 @@ RUN npm install -g pnpm
 WORKDIR /usr/src/app
 
 # Copy package files and install dependencies
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile  # Use install instead of ci
+COPY package.json pnpm-lock.yaml tsconfig.json ./
+RUN pnpm install --frozen-lockfile
 
 # Copy the rest of the application
 COPY . .
+
+# Compile TypeScript before running
+RUN pnpm build  # Ensure TypeScript compiles
 
 # Start the application
 CMD ["pnpm", "start"]
