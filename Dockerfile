@@ -6,6 +6,6 @@ ENV PUPPETEER_SKIP_DOWNLOAD=true \
 WORKDIR /usr/src/app
 
 COPY package.json pnpm-lock.yaml ./
-RUN npm ci
+RUN pnpm ci
 COPY . .
-CMD ["node", "-r", "tsconfig-paths/register", "dist/index.js"]
+CMD ["pnpm", "start"]
