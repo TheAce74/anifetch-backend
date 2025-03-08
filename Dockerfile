@@ -8,4 +8,4 @@ WORKDIR /usr/src/app
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm ci
 COPY . .
-CMD ["pnpm", "start"]
+CMD ["node", "-r", "tsconfig-paths/register", "dist/index.js"]
