@@ -23,13 +23,14 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.get("/", async (req, res) => {
+  const browser = await puppeteer.launch();
+
   try {
     const { url, resolution } = req.query as {
       url: string;
       resolution: string;
     };
 
-    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(url);
 
@@ -82,7 +83,6 @@ app.get("/", async (req, res) => {
       //     sleepSync(5000);
       //   }
 
-      await browser.close();
       res.status(200).json({
         links: preDownloadLinks,
       });
@@ -92,6 +92,8 @@ app.get("/", async (req, res) => {
     res.status(500).json({
       message: "Something went terribly wrong!",
     });
+  } finally {
+    await browser.close();
   }
 });
 
