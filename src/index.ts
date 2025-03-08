@@ -49,6 +49,8 @@ app.get("/", async (req, res) => {
         );
       }
 
+      console.log(episodeProviderLinks);
+
       const preDownloadLinks = [];
       for (let i = 0; i < episodeProviderLinks.length; i++) {
         await page.goto(episodeProviderLinks[i]);
@@ -56,6 +58,8 @@ app.get("/", async (req, res) => {
         const episodeProviderMarkup = await page.content();
         preDownloadLinks.push(extractPreDownloadLinks(episodeProviderMarkup));
       }
+
+      console.log(preDownloadLinks);
 
       //   for (let i = 0; i < preDownloadLinks.length; i++) {
       //     await page.goto(preDownloadLinks[i]);
