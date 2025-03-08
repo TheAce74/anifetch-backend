@@ -31,7 +31,7 @@ app.get("/", async (req, res) => {
       "--no-zygote",
     ],
     executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
-    headless: false,
+    headless: true,
   });
 
   try {
