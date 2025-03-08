@@ -86,7 +86,7 @@ app.get("/", async (req, res) => {
       res.status(200).json({
         links: preDownloadLinks,
       });
-    }, 10000);
+    }, 20000);
   } catch (error) {
     console.error(error);
     res.status(500).json({
